@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeftRight, ArrowRight } from 'lucide-react';
 import TokenSelect from '@/components/TokenSelect';
 import UsdInput from '@/components/UsdInput';
 import Results from '@/components/Results';
@@ -170,7 +170,7 @@ export default function TokenSwapPage() {
                   aria-label="swap tokens"
                   className="border-border dark:border-border rounded-full border bg-white p-2 shadow-sm transition-transform hover:scale-105 dark:bg-slate-800"
                 >
-                  <ArrowRight className="h-5 w-5 rotate-90" />
+                  <ArrowLeftRight className="h-5 w-5" />
                 </button>
               </div>
 

@@ -1,17 +1,20 @@
 'use client';
 
-import { ThemeProvider as NextThemeProvider } from 'next-themes';
-import { FC, PropsWithChildren } from 'react';
+import { ThemeProvider as ShadCNThemeProvider } from 'next-themes';
+import { ReactNode } from 'react';
 
-export const ThemeProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
-  // attribute="class" toggles `class` on <html> so your `.dark {}` rules apply
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
   return (
-    <NextThemeProvider
+    <ShadCNThemeProvider
       attribute="class"
       defaultTheme="system"
-      enableSystem={true}
+      enableSystem
     >
       {children}
-    </NextThemeProvider>
+    </ShadCNThemeProvider>
   );
-};
+}
