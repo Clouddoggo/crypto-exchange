@@ -1,4 +1,12 @@
 @import "tailwindcss";
+
+:root {
+  --transition-fast: 150ms;
+}
+html, body {
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
