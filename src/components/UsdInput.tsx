@@ -1,4 +1,3 @@
-// src/app/swap/components/UsdInput.tsx
 'use client';
 
 import { Input } from '@/components/ui/input';

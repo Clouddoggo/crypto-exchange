@@ -1,4 +1,3 @@
-// src/app/swap/components/TokenSelect.tsx
 'use client';
 
 import {
@@ -6,12 +5,10 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from '@/components/ui/select';
 import type { TokenRequest, TokenResponse } from '@/types/token';
-import { TOKEN_LOGO_MAP, tokenKey, TOKENS } from '@/lib/tokens';
+import { tokenKey, TOKENS } from '@/lib/tokens';
 import { useMemo } from 'react';
-import TokenBadge from './TokenBadge';
 
 interface TokenSelectProps {
   token: TokenRequest;
@@ -43,13 +40,7 @@ export default function TokenSelect({
         onValueChange={(val) => onChange(TOKENS.find((t) => t.symbol === val)!)}
       >
         <SelectTrigger className="border-border dark:border-border flex w-full items-center justify-between rounded-lg border bg-white px-3 py-2 text-black shadow-sm transition-colors duration-150 dark:bg-slate-800 dark:text-white">
-          <div className="flex items-center gap-2">
-            <TokenBadge
-              symbol={token.symbol}
-              logoUrl={TOKEN_LOGO_MAP[token.symbol]}
-            />
-          </div>
-
+          {token.symbol} 
           <div className="text-xs opacity-80">
             {badge?.priceUsd ? `$${Number(badge.priceUsd).toFixed(4)}` : '—'}
           </div>
@@ -59,13 +50,7 @@ export default function TokenSelect({
           {TOKENS.map((token) => (
             <SelectItem key={token.symbol} value={token.symbol}>
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <TokenBadge
-                    symbol={token.symbol}
-                    logoUrl={TOKEN_LOGO_MAP[token.symbol]}
-                  />
-                </div>
-                &nbsp;
+                {token.symbol} 
                 <small className="opacity-70">
                   {tokenDataMap[tokenKey(token)]?.priceUsd
                     ? `$${Number(tokenDataMap[tokenKey(token)]!.priceUsd).toFixed(4)}`

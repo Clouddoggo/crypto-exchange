@@ -13,4 +13,5 @@ export const TOKEN_LOGO_MAP: Record<string, string> = {
   USDC: 'https://cryptologos.cc/logos/usd-coin-usdc-logo.svg?v=040',
   USDT: 'https://cryptologos.cc/logos/tether-usdt-logo.svg?v=040',
   ETC: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=040',
+  WBTC: 'https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg?v=040'
 };
