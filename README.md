@@ -55,10 +55,11 @@ npm run dev
 
 ## Libraries Used
 
-- **Next.js** — React framework for server-side rendering and routing.
-- **Tailwind CSS** — Utility-first CSS framework for rapid UI styling.
-- **ShadCN/UI** — Component library for cards, buttons, inputs, selects and theme provider.
-- **Lucide React** — Icons for theme toggle and swap button.
+- **Next.js** — React framework for server-side rendering and routing. Chosen for its strong developer experience, built-in routing, and optimized performance for modern web apps.  
+- **Tailwind CSS** — Utility-first CSS framework for rapid UI styling. Chosen for its low cognitive overhead, flexibility, and consistent responsive design patterns.  
+- **ShadCN/UI** — Lightweight, unopinionated component library built on Tailwind CSS. Chosen for its simplicity, composability, and consistent theming with minimal bundle size impact.  
+- **Lucide React** — Icon library for theme toggle and swap buttons. Chosen for its lightweight, tree-shakeable icons and ease of integration with React components.  
+
 
 ## Notes
 
