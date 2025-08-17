@@ -42,7 +42,7 @@ export default function TokenSelect({
         <SelectTrigger className="border-border dark:border-border flex w-full items-center justify-between rounded-lg border bg-white px-3 py-2 text-black shadow-sm transition-colors duration-150 dark:bg-slate-800 dark:text-white">
           {token.symbol} 
           <div className="text-xs opacity-80">
-            {badge?.priceUsd ? `$${Number(badge.priceUsd).toFixed(4)}` : '—'}
+            {badge?.priceUsd ? `${Number(badge.priceUsd).toFixed(4)} USD/unit` : '—'}
           </div>
         </SelectTrigger>
 
@@ -50,12 +50,7 @@ export default function TokenSelect({
           {TOKENS.map((token) => (
             <SelectItem key={token.symbol} value={token.symbol}>
               <div className="flex items-center justify-between">
-                {token.symbol} 
-                <small className="opacity-70">
-                  {tokenDataMap[tokenKey(token)]?.priceUsd
-                    ? `$${Number(tokenDataMap[tokenKey(token)]!.priceUsd).toFixed(4)}`
-                    : 'loading...'}
-                </small>
+                {token.symbol}
               </div>
             </SelectItem>
           ))}
