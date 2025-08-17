@@ -14,20 +14,27 @@ interface UsdInputProps {
   quickAmounts?: number[]; // e.g. [10, 50, 100]
 }
 
-export default function UsdInput({ value, onChange, onManualCalculate, loading, error, quickAmounts = [10, 50, 100] }: UsdInputProps) {
+export default function UsdInput({
+  value,
+  onChange,
+  onManualCalculate,
+  loading,
+  error,
+  quickAmounts = [10, 50, 100],
+}: UsdInputProps) {
   return (
     <div>
-      <label className="block mb-1 text-sm font-medium">Amount (USD)</label>
+      <label className="mb-1 block text-sm font-medium">Amount (USD)</label>
 
-      <div className="flex gap-3 items-center">
-        <div className="flex items-center gap-3 flex-1 bg-white dark:bg-slate-800 border border-border dark:border-border rounded-lg px-3">
-          <DollarSign className="w-5 h-5 opacity-80" />
+      <div className="flex items-center gap-3">
+        <div className="border-border dark:border-border flex flex-1 items-center gap-3 rounded-lg border bg-white px-3 dark:bg-slate-800">
+          <DollarSign className="h-5 w-5 opacity-80" />
           <Input
             type="number"
             placeholder="Please enter an amount to explore"
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="bg-transparent ring-0 border-0 p-0 text-lg font-semibold text-black dark:text-white placeholder:opacity-60"
+            className="border-0 bg-transparent p-0 text-lg font-semibold text-black ring-0 placeholder:opacity-60 dark:text-white"
             inputMode="decimal"
           />
         </div>
@@ -35,7 +42,7 @@ export default function UsdInput({ value, onChange, onManualCalculate, loading, 
         <Button
           onClick={onManualCalculate}
           disabled={loading}
-          className="bg-gradient-to-r from-indigo-600 to-rose-500 hover:from-indigo-500 hover:to-rose-400 text-white px-4"
+          className="bg-gradient-to-r from-indigo-600 to-rose-500 px-4 text-white hover:from-indigo-500 hover:to-rose-400"
         >
           {loading ? 'Calculating...' : 'Explore'}
         </Button>
@@ -46,7 +53,7 @@ export default function UsdInput({ value, onChange, onManualCalculate, loading, 
           <button
             key={a}
             onClick={() => onChange(String(a))}
-            className="text-xs px-2 py-1 rounded-md bg-muted text-muted-foreground dark:bg-muted text-sm transition"
+            className="bg-muted text-muted-foreground dark:bg-muted rounded-md px-2 py-1 text-sm text-xs transition"
             type="button"
           >
             ${a}
@@ -54,7 +61,7 @@ export default function UsdInput({ value, onChange, onManualCalculate, loading, 
         ))}
       </div>
 
-      {error && <p className="text-xs text-destructive mt-2">{error}</p>}
+      {error && <p className="text-destructive mt-2 text-xs">{error}</p>}
     </div>
   );
 }

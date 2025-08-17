@@ -19,23 +19,25 @@ export default function TokenSwapPage() {
   const [toAmount, setToAmount] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [tokenDataMap, setTokenDataMap] = 
-    useState<Record<string, TokenResponse | null>>({});
+  const [tokenDataMap, setTokenDataMap] = useState<
+    Record<string, TokenResponse | null>
+  >({});
   const [lastUpdated, setLastUpdated] = useState<number | null>(null);
 
-  const fetchTokenBatch =
-    async (tokens: TokenRequest[]): Promise<TokenResponse[]> => {
-      const res = await fetch('/api/token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(tokens),
-      });
-      if (!res.ok) {
-        const payload = await res.json().catch(() => ({}));
-        throw new Error(payload?.error || 'Failed to fetch token data');
-      }
-      return res.json();
-    };
+  const fetchTokenBatch = async (
+    tokens: TokenRequest[],
+  ): Promise<TokenResponse[]> => {
+    const res = await fetch('/api/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(tokens),
+    });
+    if (!res.ok) {
+      const payload = await res.json().catch(() => ({}));
+      throw new Error(payload?.error || 'Failed to fetch token data');
+    }
+    return res.json();
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -67,11 +69,19 @@ export default function TokenSwapPage() {
 
       setTokenDataMap((prev) => ({
         ...prev,
-        [`${fromData.chainId}:${fromData.symbol}`]: { ...fromData, lastUpdated: Date.now() },
-        [`${toData.chainId}:${toData.symbol}`]: { ...toData, lastUpdated: Date.now() },
+        [`${fromData.chainId}:${fromData.symbol}`]: {
+          ...fromData,
+          lastUpdated: Date.now(),
+        },
+        [`${toData.chainId}:${toData.symbol}`]: {
+          ...toData,
+          lastUpdated: Date.now(),
+        },
       }));
 
-      setFromAmount(fromData.priceUsd ? (usd / fromData.priceUsd).toFixed(6) : '-');
+      setFromAmount(
+        fromData.priceUsd ? (usd / fromData.priceUsd).toFixed(6) : '-',
+      );
       setToAmount(toData.priceUsd ? (usd / toData.priceUsd).toFixed(6) : '-');
       setLastUpdated(Date.now());
     } catch (err) {
@@ -130,37 +140,47 @@ export default function TokenSwapPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white p-6">
-      <div className="max-w-2xl mx-auto">
-        <header className="flex items-start justify-between mb-6">
+    <div className="min-h-screen bg-white p-6 text-black dark:bg-gray-900 dark:text-white">
+      <div className="mx-auto max-w-2xl">
+        <header className="mb-6 flex items-start justify-between">
           <div>
             <h1 className="text-2xl font-bold">Token Price Explorer</h1>
-            <p className="mt-1 text-sm text-muted-foreground max-w-xl">
+            <p className="text-muted-foreground mt-1 max-w-xl text-sm">
               Explore approximate token amounts for a USD value.
             </p>
           </div>
           <ThemeToggle />
         </header>
 
-        <Card className="bg-white dark:bg-slate-900 border border-border dark:border-border shadow-xl rounded-2xl overflow-hidden">
-          <CardContent className="p-6 space-y-6">
-            <div className="grid grid-cols-12 gap-4 items-end">
+        <Card className="border-border dark:border-border overflow-hidden rounded-2xl border bg-white shadow-xl dark:bg-slate-900">
+          <CardContent className="space-y-6 p-6">
+            <div className="grid grid-cols-12 items-end gap-4">
               <div className="col-span-5">
-                <TokenSelect token={fromToken} tokenDataMap={tokenDataMap} onChange={setFromToken} label="From" />
+                <TokenSelect
+                  token={fromToken}
+                  tokenDataMap={tokenDataMap}
+                  onChange={setFromToken}
+                  label="From"
+                />
               </div>
 
               <div className="col-span-2 flex justify-center">
                 <button
                   onClick={handleSwap}
                   aria-label="swap tokens"
-                  className="bg-white dark:bg-slate-800 shadow-sm border border-border dark:border-border rounded-full p-2 hover:scale-105 transition-transform"
+                  className="border-border dark:border-border rounded-full border bg-white p-2 shadow-sm transition-transform hover:scale-105 dark:bg-slate-800"
                 >
-                  <ArrowRight className="rotate-90 w-5 h-5" />
+                  <ArrowRight className="h-5 w-5 rotate-90" />
                 </button>
               </div>
 
               <div className="col-span-5">
-                <TokenSelect token={toToken} tokenDataMap={tokenDataMap} onChange={setToToken} label="To" />
+                <TokenSelect
+                  token={toToken}
+                  tokenDataMap={tokenDataMap}
+                  onChange={setToToken}
+                  label="To"
+                />
               </div>
             </div>
 
@@ -185,7 +205,10 @@ export default function TokenSwapPage() {
           </CardContent>
         </Card>
 
-        <footer className="mt-6 text-xs text-muted-foreground">Tip: Values are approximations — for swaps check a DEX aggregator for real quotes & slippage estimates.</footer>
+        <footer className="text-muted-foreground mt-6 text-xs">
+          Tip: Values are approximations — for swaps check a DEX aggregator for
+          real quotes & slippage estimates.
+        </footer>
       </div>
     </div>
   );

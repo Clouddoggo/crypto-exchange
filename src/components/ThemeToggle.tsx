@@ -20,7 +20,11 @@ export default function ThemeToggle() {
   const resolved = theme === 'system' ? systemTheme : theme;
 
   return (
-    <Button variant="outline" size="sm" onClick={() => setTheme(resolved === 'dark' ? 'light' : 'dark')}>
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={() => setTheme(resolved === 'dark' ? 'light' : 'dark')}
+    >
       {resolved === 'dark' ? <Sun /> : <Moon />}
     </Button>
   );
